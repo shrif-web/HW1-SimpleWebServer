@@ -10,18 +10,9 @@ app.use(cors());
 var crypto = require('crypto');
 var hash = crypto.createHash('sha256');
 
-app.get('/nodejs/write', (req, res) => {
-    
-    
-    
-    res.json({
-        result: [
-            {id: 1, name: "n1"},
-            {id: 2, name: "n2"},
-            {id: 3, name: "n3"},
-        ],
-    });
-    //res.write('Hello World!')
+app.get("/nodejs/write", (req, res) => {
+    console.log(req.query.line);
+    res.end('Hello World!');
   });
 
   app.post("/nodejs/sha256", (req, res) => {
@@ -37,7 +28,6 @@ app.get('/nodejs/write', (req, res) => {
   
 
 app.listen(port, () => {
-    //var ali = {"1": 14, "2": 13};
     console.log(`Example app listening at http://localhost:${port}`);
-    //console.log(ali["1"]);
+
 });
