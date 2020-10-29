@@ -15,8 +15,10 @@
         var num_one = document.getElementById("num1");
         var num_two = document.getElementById("num2");
         var result = document.getElementById("res");
+        var radiob = document.getElementById("radiobtn1");
 
         const data = { "1": Number(num_one.value, 10), "2": Number(num_two.value, 10) };
+    if (radiob.checked){
         fetch('http://localhost:3000/nodejs/sha256', {method: 'POST' ,
         headers: {
             'Content-Type': 'application/json',
@@ -38,10 +40,13 @@
         console.log('Fetch Error :-S', err);
       });
     }
+    }
 
     function sendLine(){
         var num_line = document.getElementById("linee");
-      fetch('http://localhost:3000/nodejs/write/?' + 'line=' + num_line.value, {method: 'GET'})
+        var radiob2 = document.getElementById("radiobtn2");
+        if (radiob2.checked){
+            fetch('http://localhost:3000/nodejs/write/?' + 'line=' + num_line.value, {method: 'GET'})
       .then(
         function(response) {
           if (response.status !== 200) {
@@ -55,6 +60,7 @@
       .catch(function(err) {
         console.log('Fetch Error :-S', err);
       });
+        }
     }
 
 </script>
@@ -76,10 +82,10 @@
         <input type="number" class="form-control" id="num2">
       </div>
       <div class="radio">
-        <label><input type="radio" name="optradio" checked>golang</label>
+        <label><input type="radio" name="optradio">golang</label>
       </div>
       <div class="radio">
-        <label><input type="radio" name="optradio">node js</label>
+        <label><input type="radio" name="optradio" checked id="radiobtn1">node js</label>
       </div>
       <div class="form-group">
         <button type="button" class="btn btn-default btn-lg" onclick="sendNums()">Send!</button>
@@ -93,10 +99,10 @@
           <input type="number" class="form-control" id="linee">
         </div>
         <div class="radio">
-          <label><input type="radio" name="optradio" checked>golang</label>
+          <label><input type="radio" name="optradio">golang</label>
         </div>
         <div class="radio">
-          <label><input type="radio" name="optradio">node js</label>
+          <label><input type="radio" name="optradio" checked id="radiobtn2">node js</label>
         </div>
         <div class="form-group">
           <button type="button" class="btn btn-default btn-lg" onclick="sendLine()">Send!</button>
