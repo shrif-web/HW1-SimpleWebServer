@@ -11,8 +11,13 @@ var crypto = require('crypto');
 var hash = crypto.createHash('sha256');
 
 app.get("/nodejs/write", (req, res) => {
-    console.log(req.query.line);
-    res.end('Hello World!');
+    var myline = req.query.line;
+
+    const nthline = require('nthline')
+    , filePath = '/Users/alismac/Documents/CE_T7/Web\ Programming/HWs/1\ -\ SimpleWebServer/backend_node/test.txt'
+    , rowNumber = myline - 1
+    nthline(rowNumber, filePath)
+    .then(line => res.end(line))
   });
 
   app.post("/nodejs/sha256", (req, res) => {

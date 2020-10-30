@@ -16,6 +16,7 @@
         var num_two = document.getElementById("num2");
         var result = document.getElementById("res");
         var radiob = document.getElementById("radiobtn1");
+        
 
         
     if (radiob.checked){    // ----------------- node version of sha operation ---------------------
@@ -67,6 +68,9 @@
     function sendLine(){
         var num_line = document.getElementById("linee");
         var radiob2 = document.getElementById("radiobtn2");
+        var result2 = document.getElementById("res2");
+        
+        // ---------------------- NODE version of nthLine operation --------------------------
         if (radiob2.checked){
             fetch('http://localhost:3000/nodejs/write/?' + 'line=' + num_line.value, {method: 'GET'})
       .then(
@@ -76,7 +80,7 @@
             return;
           }
           response.text().then(txt=> 
-          console.log(txt));
+          result2.innerHTML = txt);
         }
       )
       .catch(function(err) {
