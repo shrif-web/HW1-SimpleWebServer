@@ -17,8 +17,9 @@
         var result = document.getElementById("res");
         var radiob = document.getElementById("radiobtn1");
 
+        
+    if (radiob.checked){    // ----------------- node version of sha operation ---------------------
         const data = { "1": Number(num_one.value, 10), "2": Number(num_two.value, 10) };
-    if (radiob.checked){
         fetch('http://localhost:3000/nodejs/sha256', {method: 'POST' ,
         headers: {
             'Content-Type': 'application/json',
@@ -31,9 +32,30 @@
             console.log('Looks like there was a problem. Status Code: ' + response.status);
             return;
           }
-          // Examine the text in the response
           response.text().then(txt=> 
           result.innerHTML = JSON.parse(txt)["result"]);
+        }
+      )
+      .catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      });
+    } else{ // ---------------------- go version of sha operation --------------------------
+        const data = { "1": num_one.value, "2": num_two.value };
+
+        fetch('http://localhost:3000/go/sha256/?' + "num1=" + num_one.value, {method: 'POST' ,
+        headers: {
+            'Content-Type': 'application/json',
+         },
+        body: JSON.stringify(data),
+     })
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + response.status);
+            return;
+          }
+          response.text().then(txt=> 
+          result.innerHTML = JSON.parse(txt)["Result"]);
         }
       )
       .catch(function(err) {
