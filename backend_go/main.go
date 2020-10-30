@@ -7,6 +7,8 @@ import(
 	"io/ioutil"
 	"log"
 	"strconv"
+	"crypto/sha256"
+	"encoding/hex"
 )
 
 type Out struct {
@@ -33,10 +35,18 @@ func helloworld(w http.ResponseWriter, r *http.Request)  {
 	var t2 = dat["2"].(string)
 	n1, err := strconv.ParseInt(t1, 10, 64)
 	n2, err := strconv.ParseInt(t2, 10, 64)
-	fmt.Println(n1 + n2)
+	n1 = n1 + n2
+	fmt.Println(n1)
 
-	//TODO: conver n1 + n2 to sha
-	res := Out{"Ali", "SHA-res"}
+
+	// sum := sha256.Sum256([]byte())
+	// fmt.Printf("%x", sum)
+	hash := sha256.New()
+	s := strconv.FormatInt(n1, 10)
+	hash.Write([]byte(s))
+	md := hash.Sum(nil)
+	mdStr := hex.EncodeToString(md)
+	res := Out{"Ali", mdStr}
 
   	js, err := json.Marshal(res)
   	if err != nil {
