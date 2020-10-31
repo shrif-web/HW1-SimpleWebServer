@@ -9,6 +9,8 @@ import(
 	"strconv"
 	"crypto/sha256"
 	"encoding/hex"
+	"os"
+	"bufio"
 )
 
 type Out struct {
@@ -16,9 +18,42 @@ type Out struct {
 	Result	string
   }
 
+func readNthLine(file string, n int) string {
+	f, err := os.Open(file)
+	if err != nil {
+		return ""
+	}
+	bf := bufio.NewReader(f)
+	var line string
+	for lnum := 0; lnum < n; lnum++ {
+		line, err = bf.ReadString('\n')
+	}
+	return line
+}
+
+
+
+
 func writehandling(w http.ResponseWriter, r *http.Request)  {
 	//TODO check wether it is a get or not
-	
+	keys, ok := r.URL.Query()["line"]
+    if !ok || len(keys[0]) < 1 {
+        log.Println("Url Param 'key' is missing")
+        return
+    }
+	key := keys[0]
+	//input number is ready
+	if n, err := strconv.Atoi(key); err == nil {
+		mydir, err := os.Getwd() 
+    	if err != nil { 
+        	fmt.Println(err) 
+    	} 
+		line := readNthLine(mydir + "/test.txt", n)
+		fmt.Println(line)
+		w.Write([]byte(line))
+	} else {
+		fmt.Println(key, "is not an integer.")
+	}
 }
 
 func shahandling(w http.ResponseWriter, r *http.Request)  {
@@ -58,6 +93,6 @@ func shahandling(w http.ResponseWriter, r *http.Request)  {
 func main()  {
 	fmt.Println("Starting a web server...")
 	http.HandleFunc("/go/sha256", shahandling)
-	http.HandleFunc("/go/sha256", writehandling)
+	http.HandleFunc("/go/write/", writehandling)
 	http.ListenAndServe(":3000", nil)
 }

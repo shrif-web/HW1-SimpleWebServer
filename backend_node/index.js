@@ -15,6 +15,7 @@ app.get("/nodejs/write", (req, res) => {
     if (myline < 1 || myline > 100){
         return res.status(400).end('the value is invalid!');
     }
+    //TODO: changing the directory to a flexible one
     const nthline = require('nthline')
     , filePath = '/Users/alismac/Documents/CE_T7/Web\ Programming/HWs/1\ -\ SimpleWebServer/backend_node/test.txt'
     , rowNumber = myline - 1
