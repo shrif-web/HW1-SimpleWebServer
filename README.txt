@@ -8,8 +8,8 @@ Group members are:
 _ Ashkan Larni
 
 This project is designed for two perpuses,
-1 - Calculation of summation of two input integers and encoding it via sha256.
-2 - Showing the requested line of a sample .txt file in server.
+1 - Calculation of summation of two input integers and its encoding using sha256.
+2 - Showing the requested line of a sample .txt file existing in server.
 
 Frontend of this project is written in html and js, and the backend is handled by two servers one written in node js and the other one in go.
 This project implemented and tested on a CentOS system managed by nginx.
