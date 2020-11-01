@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require("cors");
-const port = 3000;
+const port = 8080;
 
 
 app.use(express.json())
@@ -17,7 +17,7 @@ app.get("/nodejs/write", (req, res) => {
     }
     //TODO: changing the directory to a flexible one
     const nthline = require('nthline')
-    , filePath = '/Users/alismac/Documents/CE_T7/Web\ Programming/HWs/1\ -\ SimpleWebServer/backend_node/test.txt'
+    , filePath = './test.txt'
     , rowNumber = myline - 1
     nthline(rowNumber, filePath)
     .then(line => res.end(line))

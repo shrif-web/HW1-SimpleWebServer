@@ -42,7 +42,6 @@ func writehandling(w http.ResponseWriter, r *http.Request)  {
         return
     }
 	key := keys[0]
-	//input number is ready
 	if n, err := strconv.Atoi(key); err == nil {
 		mydir, err := os.Getwd() 
     	if err != nil { 

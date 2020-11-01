@@ -22,7 +22,7 @@
 
         if (radiob.checked) {    // ----------------- node version of sha operation ---------------------
             const data = { "1": Number(num_one.value, 10), "2": Number(num_two.value, 10) };
-            fetch('http://localhost:3000/nodejs/sha256', {
+            fetch('http://192.168.1.60/nodejs/sha256', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +45,7 @@
         } else { // ---------------------- go version of sha operation --------------------------
             const data = { "1": num_one.value, "2": num_two.value };
 
-            fetch('http://localhost:3000/go/sha256/?' + "num1=" + num_one.value, {
+            fetch('http://192.168.1.60/go/sha256', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +75,7 @@
 
         // ---------------------- NODE version of nthLine operation --------------------------
         if (radiob2.checked) {
-            fetch('http://localhost:3000/nodejs/write/?' + 'line=' + num_line.value, { method: 'GET' })
+            fetch('http://192.168.1.60/nodejs/write/?' + 'line=' + num_line.value, { method: 'GET' })
                 .then(
                     function (response) {
                         if (response.status !== 200) {
@@ -90,7 +90,7 @@
                     console.log('Fetch Error :-S', err);
                 });
         } else{
-            fetch('http://localhost:3000/go/write/?' + 'line=' + num_line.value, { method: 'GET' })
+            fetch('http://192.168.1.60/go/write/?' + 'line=' + num_line.value, { method: 'GET' })
                 .then(
                     function (response) {
                         if (response.status !== 200) {
