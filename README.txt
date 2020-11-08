@@ -7,7 +7,7 @@ Group members are:
 - Sepehr Ashrafzadeh
 _ Ashkan Larni
 
-This project is designed for two perpuses,
+This project is designed for two purposes,
 1 - Calculation of summation of two input integers and its encoding using sha256.
 2 - Showing the requested line of a sample .txt file existing in server.
 
